@@ -1,7 +1,10 @@
 import mongoose from 'mongoose';
 
-export interface IUser{ 
+export default interface IUser{ 
     _id?: mongoose.Types.ObjectId;
+    role?: string; 
+    scope?: string;
+    permissions?: Array<Number | string>;
     firstname: string;
     lastname: string; 
     email: string; 

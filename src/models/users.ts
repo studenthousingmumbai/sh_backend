@@ -1,4 +1,4 @@
-import { IUser } from "../types/IUser";
+import IUser from "../types/IUser";
 import { model, Schema } from 'mongoose';
 import { Password } from '../utils/password';
 
@@ -15,12 +15,15 @@ const userSchema = new Schema<IUser>(
         firstname: { type: String, required: true }, 
         lastname: { type: String, required: true }, 
         email: { type: String, required: true }, 
-        password: { type: String, required: false }, 
+        password: { type: String, required: true }, 
+        role: { type: String, required: false }, 
+        scope: { type: String, required: false }, 
+        permissions: { type: [String], required: false }, 
         phone_number: { type: String, required: false }, 
-        dob: { type: Date, required: true }, 
+        dob: { type: Date, required: false }, 
         google_signin: { type: Boolean, required: false }, 
-        address: { type: addressSchema, required: true }, 
-        deleted: { type: Boolean, required: false }
+        address: { type: addressSchema, required: false }, 
+        deleted: { type: Boolean, required: false }, 
     },
     {
         timestamps: true,

@@ -1,31 +1,29 @@
 import mongoose from 'mongoose';
 
-export interface IListing { 
+export default interface IListing { 
     _id?: mongoose.Types.ObjectId;
-    location: { 
-        lat: string;
-        long: string; 
-    };
-    description: string;
-    rules: Array<string>;
+    name: string, 
+    gender: string, 
+    location?: { 
+        lat: string, 
+        long: string 
+    }, 
+    floors?: [
+        {
+            floor_number: number, 
+            appartments: Array<string>       // will store an array of references to an appartment object     
+        }
+    ], 
+    images?: Array<string>,
+    description: string, 
+    rules?: Array<string>, 
     amenities: Array<{
-        image: string,
-        description: string 
+        name: string, 
     }>, 
     address: string, 
-    price: number, 
-    walkthrough_url: string, 
-    floor_plan: { 
-        image: string, 
-        bounding_boxes: Array<{ 
-            bed_id: string                // bed_id 
-            tl: Array<number>,
-            tr: Array<number>,
-            bl: Array<number>,
-            br: Array<number>,
-        }>, 
-    },
+    price: string, 
+    deleted: boolean, 
+    available: boolean,
     created_at: Date,
     updated_at: Date,
-    deleted: boolean 
 };

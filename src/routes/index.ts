@@ -4,9 +4,17 @@ import { BadRequestError } from '../errors';
 import { errorHandler } from '../middleware';
 
 // import api routers here 
+import userRouter from './users'; 
+import orderRouter from './orders'; 
+import listingRouter from './listings'; 
+import statsRouter from './stats'; 
 
 const registerResourceRoutes = (app: Express) => { 
     // make app.use calls here eg - app.use("/user", userRouter); 
+    app.use('/user', userRouter); 
+    app.use('/order', orderRouter); 
+    app.use('/listing', listingRouter); 
+    app.use('/stats', statsRouter);
 };
 
 const registerErrorHandlers = (app: Express) =>  {

@@ -1,19 +1,14 @@
-import { IUser } from './IUser';
-import { IListing } from './IListing';
-import mongoose from 'mongoose';
+import mongoose, { Types } from 'mongoose';
+import { OrderStatus } from '../constants';
 
-export interface IOrder { 
-    _id?: mongoose.Types.ObjectId;
-    user: mongoose.Types.ObjectId | string | IUser; 
-    listing: mongoose.Types.ObjectId | string | IListing; 
-    bed_ids: Array<string>; 
-    locked: boolean; 
-    status: string; 
-    payment_info: { 
-        method: string; 
-        card_number?: string; 
-        upi_id?: string; 
-    }; 
+export default interface IOrder { 
+    _id?: mongoose.Types.ObjectId,
+    user: String, 
+    listing: String, 
+    beds: Array<string>, 
+    status: OrderStatus, 
+    payment_info: any, 
+    payment_failure: boolean,
     deleted?: Boolean;
     created_at?: Date;
     updated_at?: Date;

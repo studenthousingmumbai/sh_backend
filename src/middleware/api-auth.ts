@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { InternalServerError, NotAuthorizedError } from '../errors';
-import Consumer from '../models/consumers';
+// import Consumer from '../models/consumers';
 
 export const apiAuth = async (req: Request, res: Response, next: NextFunction) => { 
     console.log("req headers", req.headers);
@@ -14,11 +14,11 @@ export const apiAuth = async (req: Request, res: Response, next: NextFunction) =
     // verify the api key provided 
     try{ 
         // find a consumer with the api key supplied
-        const consumer = await Consumer.findOne({ api_key });
+        // const consumer = await Consumer.findOne({ api_key });
         
-        if(!consumer){
-            throw new NotAuthorizedError();
-        }
+        // if(!consumer){
+        //     throw new NotAuthorizedError();
+        // }
     }   
     catch (err) {
         throw new InternalServerError();

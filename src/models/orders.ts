@@ -1,15 +1,15 @@
-import { IOrder } from "../types/IOrder";
+import IOrder from "../types/IOrder";
 import mongoose, { model, Schema, Types } from 'mongoose';
 
 const orderSchema = new Schema<IOrder>(
     {
-        user: { type: Types.ObjectId, ref: 'User' }, 
-        listing: { type: Types.ObjectId, ref: 'Listing'}, 
-        bed_ids: { type: [String], required: true }, 
-        locked: { type: Boolean, required: true }, 
-        status: { type: String, required: true }, 
+        user: { type: Types.ObjectId, ref: 'User', required: true }, 
+        listing: { type: Types.ObjectId, ref: 'Listing', required: true }, 
+        beds: { type: [Types.ObjectId], required: true }, 
         payment_info: { type: mongoose.Schema.Types.Mixed, required: true }, 
-        deleted: { type: Boolean, required: true } 
+        status: { type: Number, required: false }, 
+        deleted: { type: Boolean, required: false }, 
+        payment_failure: { type: Boolean, required: false } 
     },
     {
         timestamps: true,
