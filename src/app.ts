@@ -18,6 +18,8 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (request, 
     const sig = request.headers['stripe-signature'];
     let event;
 
+    console.log("Stripe event received: ", event); 
+
     try {
         event = stripe.webhooks.constructEvent(request.body, sig, endpointSecret);
     } catch (err: any) {
@@ -25,6 +27,8 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (request, 
         response.status(400).send(`Webhook Error: ${err.message}`);
         return;
     }
+
+    console.log("Signature verified successfully!!");
 
     // Handle the event
     switch (event.type) {
