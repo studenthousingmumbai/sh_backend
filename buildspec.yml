@@ -19,7 +19,7 @@ phases:
 
 artifacts:
   files:
-    - .platform/**
-    - Build/**
+    - .platform/
+    - Build/
     - package.json
     - package-lock.json
