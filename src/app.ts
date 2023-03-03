@@ -3,12 +3,13 @@ import express, { Request, Response } from 'express';
 import cors from 'cors';
 import configureRoutes from './routes';
 
+import config from './config';
 import Bed from './models/beds';
 import Order from './models/orders';
 
 const app = express();
-const stripe = require('stripe')('sk_test_51MeEnySDJyp0mFKa6BuBTWkybMkgzgR5Jq4iSPT2OXXJopNlMKHr5xiIMru8VtcxLSEZiOkWMeARE1z44tEMlJDj00bcP8uKfj'); 
-const endpointSecret = "whsec_867ea4680dc2930a091113d19540feabb6fdaafe7cc8f3305e2245467853e7d9";
+const stripe = require('stripe')(config.STRIPE_SECRET_KEY); 
+const endpointSecret = config.STRIPE_ENDPOINT_SECRET;
 
 // register mandatory middleware 
 app.use(cors());

@@ -23,7 +23,6 @@ export default [
     async (req: Request, res: Response) => { 
         const { available, locked, room_no, bbox } = req.body;
         const { id } = req.params; 
-
         const bed = await Bed.findById(id); 
 
         if(!bed) {
@@ -33,10 +32,14 @@ export default [
         bed.set({ 
             available: available !== undefined ? available : bed.available, 
             locked: locked !== undefined ? locked : bed.locked, 
+            locked_at: req.body.locked ? Date.now() : 0, 
+            locked_by: req.body.locked_by ? req.body.locked_by : "", 
             room_no: room_no !== undefined ? room_no : bed.room_no, 
-            bounding_box: bbox !== undefined ? bbox: bed.bounding_box
+            bounding_box: bbox !== undefined ? bbox: bed.bounding_box, 
         }); 
         await bed.save(); 
+
+        console.log("Updated bed and saved changes: ", bed);
 
         res.status(200).send(bed);
     }

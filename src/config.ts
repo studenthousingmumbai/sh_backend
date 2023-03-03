@@ -23,5 +23,6 @@ export default {
     STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY as string, 
 
     STRIPE_CHECKOUT_SUCCESS_URL: process.env.STRIPE_CHECKOUT_SUCCESS_URL as string, 
-    STRIPE_CHECKOUT_CANCEL_URL: process.env.STRIPE_CHECKOUT_CANCEL_URL as string 
+    STRIPE_CHECKOUT_CANCEL_URL: process.env.STRIPE_CHECKOUT_CANCEL_URL as string, 
+    STRIPE_ENDPOINT_SECRET: process.env.STRIPE_ENDPOINT_SECRET as string
 }; 
