@@ -3,55 +3,64 @@ import { body } from 'express-validator';
 
 import { validateRequest } from '../../middleware';
 import { BadRequestError } from '../../errors';
-import { generateAccessToken } from '../../utils/auth';
-import User from '../../models/users';
-import { Password } from '../../utils/password';
+import Order from '../../models/orders'; 
+import { getDaysLeftUntilOneYearFromMongoDBTimestamp } from '../../utils/datetime';
 
 const validation_rules = [
-    body('email').exists().withMessage("email must be supplied").notEmpty().withMessage('email cannot be blank').isEmail().withMessage('email must be valid'),
-    body('password').exists().withMessage("password must be supplied").notEmpty().withMessage('password cannot be blank').trim().isLength({ min: 8, max: 16}).withMessage("password must be minimum 8 and maximum 16 characters long"),
+    
 ];
 
 const middleware: any = [
     // auth middleware here 
-    ...validation_rules,
-    validateRequest
+    // ...validation_rules,
+    // validateRequest
 ];
 
 export default [
     ...middleware, 
     async (req: Request, res: Response) => { 
-        const { email, password } = req.body;
+        const skip =  parseInt(req.body.skip) || 0;
+        const limit = parseInt(req.body.limit) || 10;
+        const { filters } = req.body; 
 
-        const existingUser = await User.findOne({ email });
+        let orders, order_count; 
 
-        // check if a user with the supplied email exists 
-        if (!existingUser) {
-            throw new BadRequestError("Invalid credentials");
-        }   
-
-        const passwordMatch = await Password.compare(existingUser.password as string, password);
-
-        if (!passwordMatch) {
-            throw new BadRequestError("Invalid credentials");
+        if(req.body.skip == 0 && req.body.limit == 0) { 
+            orders = await Order.find(filters).populate("user bed listing appartment"); 
+        } else { 
+            orders = await Order.find(filters).populate("user bed listing appartment").skip(skip).limit(limit); 
         }
 
-        // generate access token 
-        const userJWT = generateAccessToken({ 
-            id: existingUser.id, 
-            email: existingUser.email, 
-            firstname: existingUser.firstname, 
-            lastname: existingUser.lastname
-        });
+        order_count = await Order.count(filters);
 
-        res.status(201).send({ 
-            access_token: userJWT, 
-            user: { 
-                id: existingUser.id, 
-                email: existingUser.email, 
-                firstname: existingUser.firstname, 
-                lastname: existingUser.lastname
-            } 
-        });
+        let orders_transformed = []; 
+
+        for(let order of orders){ 
+            const Order = order as any; 
+
+            orders_transformed.push({ 
+                id: Order.id, 
+                listing: Order.listing && Order.listing.name || "",  
+                listing_id: Order.listing && Order.listing.id || "", 
+                images: Order.listing && Order.listing.images || [], 
+                address: Order.listing && Order.listing.address || "",
+                user: Order.user && Order.user.firstname + " " + Order.user.lastname || "", 
+                bed: Order.bed && Order.bed._id || "", 
+                room_no: Order.bed && Order.bed.room_no || "",
+                amount: Order.amount,
+                floor: Order.floor, 
+                course: Order.course || "",
+                year: Order.year || "", 
+                bed_no: Order.bed && Order.bed.bed_no || "", 
+                appartment: Order.appartment && Order.appartment.appartment_number || "", 
+                days_remaining: getDaysLeftUntilOneYearFromMongoDBTimestamp(Order.createdAt), 
+                createdAt: Order.createdAt, 
+                updatedAt: Order.updatedAt
+            }); 
+        }
+
+        console.log("orders transformed", orders_transformed); 
+
+        return res.status(200).send({ orders: orders_transformed, total: order_count });
     }
-]
+]; 

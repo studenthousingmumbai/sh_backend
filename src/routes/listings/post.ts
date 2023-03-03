@@ -43,16 +43,7 @@ export default [
         const images = [];
         const amenities_images = []; 
 
-        // @ts-ignore
         const listing_image_files: any = req.files && "images" in req.files && req.files['images'] || null; 
-        // @ts-ignore
-        // const amenities_image_files: any = req.files['amenities_images'] || null; 
-        // @ts-ignore
-        // const floor_plan_image_file: any = req.files['floor_plan'] &&  req.files['floor_plan'][0] || null; 
-
-        // console.log("images: ", listing_image_files); 
-        // console.log("amenities: ", amenities_image_files); 
-        // console.log("floor_plan: ", floor_plan_image_file); 
 
         // check if another listing with the same name does not exist  
         const existing_listing = await Listing.findOne({ name }); 
@@ -61,16 +52,17 @@ export default [
             throw new BadRequestError(`Listing with name: ${name} already exists`);
         }
 
-        amenities = JSON.parse(amenities); 
-        console.log("amenities: ", amenities); 
-        
+        if (amenities && typeof amenities === "string") {
+            amenities = JSON.parse(amenities); 
+            console.log("amenities: ", amenities); 
+        }
         // TODOD - use address to find lat long 
 
         // construct listing object and save to db 
         const new_listing = new Listing({
             name, 
             description, 
-            address, 
+            address: JSON.parse(address), 
             price, 
             gender, 
             amenities
@@ -108,67 +100,7 @@ export default [
             await new_listing.save(); 
         }
         
-        // if(floor_plan_image_file){ 
-        //     try { 
-        //         // upload floor_plan image to s3 & get s3 urls 
-        //         const s3_response: any  = await s3_upload(floor_plan_image_file.buffer, `listings/${new_listing._id}/floor_plan`); 
-        //         console.log(s3_response); 
-
-        //         new_listing.set({ floor_plan: s3_response.Location });
-
-        //         await new_listing.save(); 
-        //     }
-        //     catch(err) { 
-        //        console.log(err); 
-        //     }
-        // }   
-
-        // if(amenities_image_files){
-        //     // upload amenities images to s3 & get s3 urls 
-        //     // @ts-ignore
-        //     for(let i=0; i < amenities_image_files.length; i++) {
-        //         const image_file = amenities_image_files[i]; 
-        //         const original_name = image_file.originalname; 
-        //         const file_extension = original_name.split('.')[1]; 
-
-        //         console.log("Original file name: ", original_name); 
-        //         console.log("File extension: ", file_extension); 
-
-        //         // upload image to s3 
-        //         try{ 
-        //             const s3_response: any  = await s3_upload(image_file.buffer, `/listings/${new_listing._id}/amenities/image_${i}`); 
-        //             console.log(s3_response); 
-
-        //             if(s3_response) { 
-        //                 amenities_images.push(s3_response.Location); 
-        //             }
-        //         }
-        //         catch(err){ 
-        //             console.log(err); 
-        //         }
-        //     }
-
-        //     for(let i=0; i < amenities.length; i++) { 
-        //         let total_images = amenities[i].total_images;
-        //         let start,end; 
-
-        //         if(i === 0){
-        //             start = 0;
-        //             end = total_images;
-        //         } else { 
-        //             start = amenities[i - 1].total_images; 
-        //             end = start + total_images;  
-        //         }
-
-        //         console.log(amenities_images.slice(start,end)); 
-        //         amenities[i].images = amenities_images.slice(start,end);
-        //     }
-        
-        //     new_listing.set({ amenities }); 
-        //     await new_listing.save(); 
-        // }
-
         // res.status(201).send({ listing: new_listing });
         res.status(201).json(new_listing);
     }
-]
+]; 

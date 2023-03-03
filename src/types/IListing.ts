@@ -20,7 +20,14 @@ export default interface IListing {
     amenities: Array<{
         name: string, 
     }>, 
-    address: string, 
+    publish?: boolean, 
+    address: {
+        line_1: string, 
+        line_2: string, 
+        city: string, 
+        state: string, 
+        zip: string
+    }, 
     price: string, 
     deleted: boolean, 
     available: boolean,

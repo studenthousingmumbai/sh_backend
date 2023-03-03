@@ -29,6 +29,8 @@ export default [
     async (req: Request, res: Response) => { 
         const { token } = req.body;
 
+        console.log(req.body);
+
         try { 
             const ticket = await client.verifyIdToken({
                 idToken: token,
@@ -36,11 +38,11 @@ export default [
             });
 
             const { name, email, picture } = ticket.getPayload();
-            // console.log("name, email, picture: ", name, email, picture);
+            console.log("name, email, picture: ", name, email, picture);
 
             const existingUser = await User.findOne({ email });
 
-            // console.log("existing user: ", existingUser);
+            console.log("existing user: ", existingUser);
 
             if(existingUser) { 
                 // generate access token 

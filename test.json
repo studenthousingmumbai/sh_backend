@@ -1,0 +1,250 @@
+{
+  "orders": [
+    {
+      "_id": "63f3566bea4b885b5585bb61",
+      "user": null,
+      "bed": {
+        "_id": "63ea4843bd6022c08050deb4",
+        "appartment": "63ea4835bd6022c08050dea6",
+        "available": false,
+        "locked": false,
+        "bounding_box": {
+          "x": 21,
+          "y": 125,
+          "w": 106,
+          "h": 91,
+          "_id": "63ea4843bd6022c08050deb5"
+        },
+        "deleted": false,
+        "room_no": 1,
+        "createdAt": "2023-02-13T14:25:07.736Z",
+        "updatedAt": "2023-02-20T11:15:55.138Z",
+        "__v": 0
+      },
+      "listing": null,
+      "amount": 10000,
+      "appartment": null,
+      "course": "BSC",
+      "year": 2,
+      "floor": 1,
+      "deleted": false,
+      "createdAt": "2023-02-20T11:15:55.180Z",
+      "updatedAt": "2023-02-20T11:15:55.180Z",
+      "__v": 0,
+      "days_remaining": 365
+    },
+    {
+      "_id": "63f35a54ea4b885b5585bc46",
+      "user": {
+        "_id": "63d3ba7cd1b81a4b1dff0e4d",
+        "firstname": "Tanay",
+        "lastname": "Kulkarni",
+        "email": "tanay_sh@test.com",
+        "password": "5e20c40be2519b1b37510ab262c1f27396211a37ad8ae60bddfb76c8e29f0261d841affb8e3c2acbfc9c018c2d4549f4f05b90758259a16eaf4137662bad5bcd.b87f6989366a1862",
+        "role": "ADMIN",
+        "scope": "ADMIN",
+        "permissions": [
+          "VIEW_LISTING",
+          "VIEW_USERS",
+          "VIEW_ORDERS",
+          "VIEW_ADMIN"
+        ],
+        "createdAt": "2023-01-27T11:50:20.922Z",
+        "updatedAt": "2023-01-30T10:48:35.632Z",
+        "__v": 0
+      },
+      "bed": {
+        "_id": "63d39176a2adb9d436a8cc13",
+        "appartment": "63cbfaac32bfd22749861663",
+        "available": false,
+        "locked": false,
+        "bounding_box": {
+          "x": 170,
+          "y": 45,
+          "w": 46,
+          "h": 112,
+          "_id": "63cd2e88ca8f7baeea41d949"
+        },
+        "deleted": false,
+        "room_no": -1,
+        "createdAt": "2023-01-27T08:55:18.315Z",
+        "updatedAt": "2023-02-20T11:32:36.851Z",
+        "__v": 0
+      },
+      "listing": {
+        "_id": "63c9026f09ff102437dd36b3",
+        "name": "Test 1234",
+        "description": "gdasg",
+        "gender": "male",
+        "amenities": ["Fridge"],
+        "address": "gdsag",
+        "price": "123241",
+        "deleted": false,
+        "available": true,
+        "images": [
+          "https://student-housing-test-bucket.s3.ap-south-1.amazonaws.com/listings/63c9026f09ff102437dd36b3/property/image_bab21201-08e8-4d0e-acc4-64a5e3c575f1.png",
+          "https://student-housing-test-bucket.s3.ap-south-1.amazonaws.com/listings/63c9026f09ff102437dd36b3/property/image_e778f50e-3ecc-4e5e-9b94-941d4519a59c.png"
+        ],
+        "floors": [
+          {
+            "floor_number": "1",
+            "appartments": [
+              "63cbfaac32bfd22749861663",
+              "63cbfabc32bfd2274986167e"
+            ],
+            "_id": "63cb80404f2d9ccccd0d2001"
+          },
+          {
+            "floor_number": "2",
+            "appartments": [],
+            "_id": "63cb80824f2d9ccccd0d2009"
+          },
+          {
+            "floor_number": "3",
+            "appartments": [],
+            "_id": "63cb809c4f2d9ccccd0d2014"
+          },
+          {
+            "floor_number": "4",
+            "appartments": [],
+            "_id": "63cb80d34f2d9ccccd0d201e"
+          },
+          {
+            "floor_number": "5",
+            "appartments": ["63d39137a2adb9d436a8caf1"],
+            "_id": "63d39130a2adb9d436a8cad3"
+          }
+        ],
+        "createdAt": "2023-01-19T08:42:23.193Z",
+        "updatedAt": "2023-01-27T08:54:15.725Z",
+        "__v": 14
+      },
+      "amount": 123241,
+      "appartment": {
+        "_id": "63cbfaac32bfd22749861663",
+        "appartment_number": 101,
+        "floor_number": 1,
+        "listing_id": "63c9026f09ff102437dd36b3",
+        "createdAt": "2023-01-21T14:46:04.516Z",
+        "updatedAt": "2023-01-22T12:48:23.353Z",
+        "__v": 0,
+        "floor_plan": "https://student-housing-test-bucket.s3.ap-south-1.amazonaws.com/listings/63cbfaac32bfd22749861663/floor_plan.jpeg",
+        "walkthrough_url": "test url here "
+      },
+      "course": "BSC",
+      "floor": 1,
+      "deleted": false,
+      "createdAt": "2023-02-20T11:32:36.862Z",
+      "updatedAt": "2023-02-20T11:32:36.862Z",
+      "__v": 0,
+      "days_remaining": 365
+    },
+    {
+      "_id": "63f35a58ea4b885b5585bc4b",
+      "user": {
+        "_id": "63d3ba7cd1b81a4b1dff0e4d",
+        "firstname": "Tanay",
+        "lastname": "Kulkarni",
+        "email": "tanay_sh@test.com",
+        "password": "5e20c40be2519b1b37510ab262c1f27396211a37ad8ae60bddfb76c8e29f0261d841affb8e3c2acbfc9c018c2d4549f4f05b90758259a16eaf4137662bad5bcd.b87f6989366a1862",
+        "role": "ADMIN",
+        "scope": "ADMIN",
+        "permissions": [
+          "VIEW_LISTING",
+          "VIEW_USERS",
+          "VIEW_ORDERS",
+          "VIEW_ADMIN"
+        ],
+        "createdAt": "2023-01-27T11:50:20.922Z",
+        "updatedAt": "2023-01-30T10:48:35.632Z",
+        "__v": 0
+      },
+      "bed": {
+        "_id": "63d39176a2adb9d436a8cc13",
+        "appartment": "63cbfaac32bfd22749861663",
+        "available": false,
+        "locked": false,
+        "bounding_box": {
+          "x": 170,
+          "y": 45,
+          "w": 46,
+          "h": 112,
+          "_id": "63cd2e88ca8f7baeea41d949"
+        },
+        "deleted": false,
+        "room_no": -1,
+        "createdAt": "2023-01-27T08:55:18.315Z",
+        "updatedAt": "2023-02-20T11:32:36.851Z",
+        "__v": 0
+      },
+      "listing": {
+        "_id": "63c9026f09ff102437dd36b3",
+        "name": "Test 1234",
+        "description": "gdasg",
+        "gender": "male",
+        "amenities": ["Fridge"],
+        "address": "gdsag",
+        "price": "123241",
+        "deleted": false,
+        "available": true,
+        "images": [
+          "https://student-housing-test-bucket.s3.ap-south-1.amazonaws.com/listings/63c9026f09ff102437dd36b3/property/image_bab21201-08e8-4d0e-acc4-64a5e3c575f1.png",
+          "https://student-housing-test-bucket.s3.ap-south-1.amazonaws.com/listings/63c9026f09ff102437dd36b3/property/image_e778f50e-3ecc-4e5e-9b94-941d4519a59c.png"
+        ],
+        "floors": [
+          {
+            "floor_number": "1",
+            "appartments": [
+              "63cbfaac32bfd22749861663",
+              "63cbfabc32bfd2274986167e"
+            ],
+            "_id": "63cb80404f2d9ccccd0d2001"
+          },
+          {
+            "floor_number": "2",
+            "appartments": [],
+            "_id": "63cb80824f2d9ccccd0d2009"
+          },
+          {
+            "floor_number": "3",
+            "appartments": [],
+            "_id": "63cb809c4f2d9ccccd0d2014"
+          },
+          {
+            "floor_number": "4",
+            "appartments": [],
+            "_id": "63cb80d34f2d9ccccd0d201e"
+          },
+          {
+            "floor_number": "5",
+            "appartments": ["63d39137a2adb9d436a8caf1"],
+            "_id": "63d39130a2adb9d436a8cad3"
+          }
+        ],
+        "createdAt": "2023-01-19T08:42:23.193Z",
+        "updatedAt": "2023-01-27T08:54:15.725Z",
+        "__v": 14
+      },
+      "amount": 123241,
+      "appartment": {
+        "_id": "63cbfaac32bfd22749861663",
+        "appartment_number": 101,
+        "floor_number": 1,
+        "listing_id": "63c9026f09ff102437dd36b3",
+        "createdAt": "2023-01-21T14:46:04.516Z",
+        "updatedAt": "2023-01-22T12:48:23.353Z",
+        "__v": 0,
+        "floor_plan": "https://student-housing-test-bucket.s3.ap-south-1.amazonaws.com/listings/63cbfaac32bfd22749861663/floor_plan.jpeg",
+        "walkthrough_url": "test url here "
+      },
+      "course": "BSC",
+      "floor": 1,
+      "deleted": false,
+      "createdAt": "2023-02-20T11:32:40.973Z",
+      "updatedAt": "2023-02-20T11:32:40.973Z",
+      "__v": 0,
+      "days_remaining": 365
+    }
+  ],
+  "total": 3
+}

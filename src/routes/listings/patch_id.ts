@@ -26,7 +26,7 @@ const middleware: any = [
 export default [
     ...middleware, 
     async (req: Request, res: Response) => { 
-        let { id, amenities, existing_images } = req.body;
+        let { id, amenities, existing_images, address } = req.body;
         const listing_image_files: any = req.files && "images" in req.files && req.files['images'] || null; 
         const new_images = []; 
 
@@ -79,8 +79,26 @@ export default [
 
         // find which images need to be deleted by comparing req.body.existing_images and listing.images
         // delete removed files from s3 here 
+        delete req.body.id; 
 
-        listing.set({  ...req.body, amenities: JSON.parse(amenities)}); 
+        if(req.body.address){ 
+            listing.set({ 
+                address: JSON.parse(address)
+            }); 
+
+            delete req.body.address; 
+        }
+        if(req.body.amenities) { 
+            listing.set({  
+                amenities: JSON.parse(amenities) 
+            }); 
+
+            delete req.body.amenities
+        }
+        listing.set({  
+            ...req.body, 
+        });
+
         await listing.save();
 
         res.status(201).send(listing);

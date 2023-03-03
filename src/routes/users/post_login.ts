@@ -39,12 +39,14 @@ export default [
 
         // check if a user with the supplied email exists 
         if (!existingUser) {
+            console.log("User not found!");
             throw new BadRequestError("Invalid credentials");
         }   
 
         const passwordMatch = await Password.compare(existingUser.password as string, password);
-            
+        
         if (!passwordMatch) {
+            console.log("passwords do not match");
             throw new BadRequestError("Invalid credentials");
         }
 

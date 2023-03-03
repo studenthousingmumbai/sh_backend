@@ -22,11 +22,18 @@ const middleware: any = [
 export default [
     ...middleware, 
     async (req: Request, res: Response) => { 
-        const skip = req.body.skip === 0 ? parseInt(req.body.skip) : 10;
-        const limit = req.body.limit === 0 ? parseInt(req.body.limit) : 10;
+        const skip = parseInt(req.body.skip) || 0;
+        const limit = parseInt(req.body.limit) || 10;
         const { filters } = req.body; 
+
+        let listings; 
+
+        if(req.body.skip == 0 && req.body.limit == 0) { 
+            listings = await Listing.find({ ...filters }); 
+        } else { 
+            listings = await Listing.find({ ...filters }).skip(skip).limit(limit); 
+        }
         
-        const listings = await Listing.find({ ...filters }).skip(skip).limit(limit); 
         const listing_count = await Listing.count(filters);
 
         return res.status(200).send({ listings, total: listing_count });

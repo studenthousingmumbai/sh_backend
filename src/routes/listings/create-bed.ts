@@ -21,11 +21,12 @@ const middleware: any = [
 export default [
     ...middleware, 
     async (req: Request, res: Response) => { 
-        const { appartment_id, bbox, room_no } = req.body;
+        const { appartment_id, bbox, room_no, bed_no } = req.body;
         const bed = new Bed({ 
             appartment: appartment_id, 
             bounding_box: bbox, 
-            room_no 
+            room_no, 
+            bed_no
         }); 
         await bed.save(); 
 

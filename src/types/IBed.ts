@@ -5,6 +5,8 @@ export default interface IBed {
     appartment: mongoose.Types.ObjectId | null,             // will store a reference to an appartment object   
     available: boolean, 
     locked: boolean, 
+    locked_by?: mongoose.Types.ObjectId,
+    locked_at?: number,
     bounding_box: { 
         x: number, 
         y: number,
@@ -12,6 +14,7 @@ export default interface IBed {
         h: number 
     },
     room_no: number, 
+    bed_no?: string, 
     deleted?: boolean;
     created_at?: Date;
     updated_at?: Date;

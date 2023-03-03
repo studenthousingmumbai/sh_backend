@@ -11,6 +11,14 @@ const floorSchema = new Schema({
     appartments: { type: [{ type: mongoose.Types.ObjectId, ref: "Appartment" }] }
 }); 
 
+const addressSchema = new Schema({ 
+    line_1: { type: String }, 
+    line_2: { type: String }, 
+    city: { type: String }, 
+    state: { type: String }, 
+    zip: { type: String }
+}); 
+
 const listingSchema = new Schema<IListing>(
     {
         name: { type: String, required: true },
@@ -19,11 +27,12 @@ const listingSchema = new Schema<IListing>(
         description: { type: String, required: true }, 
         gender: { type: String, required: true }, 
         amenities: { type: [String], required: false }, 
-        address: { type: String, required: true }, 
+        address: { type: addressSchema, required: true }, 
         price: { type: String, required: true }, 
         deleted: { type: Boolean, required: false, default: false },
         available: { type: Boolean, required: false, default: true }, 
-        images: { type: [String], required: false }
+        images: { type: [String], required: false }, 
+        publish: { type: Boolean, default: false, required: false }
     },
     {
         timestamps: true,

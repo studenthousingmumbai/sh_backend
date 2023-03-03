@@ -1,4 +1,4 @@
-import { Express, Request, Response } from 'express';
+import express, { Express, Request, Response } from 'express';
 
 import { BadRequestError } from '../errors';
 import { errorHandler } from '../middleware';
@@ -11,10 +11,10 @@ import statsRouter from './stats';
 
 const registerResourceRoutes = (app: Express) => { 
     // make app.use calls here eg - app.use("/user", userRouter); 
+    app.use('/stats', statsRouter);
     app.use('/user', userRouter); 
     app.use('/order', orderRouter); 
     app.use('/listing', listingRouter); 
-    app.use('/stats', statsRouter);
 };
 
 const registerErrorHandlers = (app: Express) =>  {

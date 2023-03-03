@@ -21,19 +21,12 @@ const middleware: any = [
 export default [
     ...middleware, 
     async (req: Request, res: Response) => { 
-        const skip = parseInt(req.body.skip);
-        const limit = parseInt(req.body.limit);
+        const skip = parseInt(req.body.skip) || 0;
+        const limit = parseInt(req.body.limit) || 10;
         const { filters } = req.body; 
-        
-        console.log("skip: ", skip); 
-        console.log("limit: ", limit); 
-        console.log("filters: ", filters); 
 
         const users = await User.find(filters).select("-password").skip(skip).limit(limit); 
         const users_count = await User.count(filters);
-
-        console.log("users: ", users.length); 
-        console.log("users_count: ", users_count); 
 
         res.status(200).json({ users, total: users_count });
     }

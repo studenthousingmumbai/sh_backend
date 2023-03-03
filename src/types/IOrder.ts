@@ -5,11 +5,14 @@ export default interface IOrder {
     _id?: mongoose.Types.ObjectId,
     user: String, 
     listing: String, 
-    beds: Array<string>, 
-    status: OrderStatus, 
-    payment_info: any, 
-    payment_failure: boolean,
+    bed: String, 
+    status: String, 
+    amount: String, 
+    appartment: String, 
+    course: String, 
+    year: String,
+    floor: String, 
     deleted?: Boolean;
-    created_at?: Date;
-    updated_at?: Date;
+    createdAt?: Date;
+    updatedAT?: Date;
 };

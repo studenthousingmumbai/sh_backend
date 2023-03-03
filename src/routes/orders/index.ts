@@ -5,13 +5,17 @@ import getOrders from './get';
 import createOrder from './post_create'; 
 import updateOrder from './patch_id'; 
 import deleteOrder from './delete_id';
+import searchOrder from './search'; 
+import createSession from './create-payment-session'; 
 
 const router = Router();
 
 router.post('/', ...createOrder);
+router.get('/search-orders', ...searchOrder);
 router.patch('/:id', ...updateOrder); 
 router.get('/:id', ...getOrder); 
 router.post("/all", ...getOrders); 
 router.delete('/:id', ...deleteOrder);
+router.post('/create-session', ...createSession);
 
 export default router;

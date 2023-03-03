@@ -10,7 +10,6 @@ const validation_rules = [
     body('listing_id').exists().withMessage("listing_id must be supplied").notEmpty().withMessage('listing_id cannot be blank'),
     body('floor_number').exists().withMessage("floor_number must be supplied").notEmpty().withMessage('floor_number cannot be blank'),
     body('appartment_number').exists().withMessage("appartment_number must be supplied").notEmpty().withMessage('appartment_number cannot be blank'),
-
 ];
 
 const middleware: any = [

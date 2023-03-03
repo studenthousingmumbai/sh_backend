@@ -25,6 +25,7 @@ export default [
     async (req: Request, res: Response) => { 
         // extract data from request body
         const { listing_id } = req.body; 
+        console.log("Listing id: ", listing_id); 
 
         const listing = await Listing.findById(listing_id); 
 
@@ -50,6 +51,6 @@ export default [
         }
         
         // res.status(201).send({ listing: new_listing });
-        res.status(201).json({result, listing_id });
+        res.status(201).json({ result, listing_id });
     }
 ]
