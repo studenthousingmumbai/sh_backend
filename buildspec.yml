@@ -15,9 +15,9 @@ phases:
   build:
     commands:
       - echo Build complete!
-      - ls Build
+      - ls
 
 artifacts:
   files:
     - './**/*'
-  base-directory: public
+  base-directory: Build
