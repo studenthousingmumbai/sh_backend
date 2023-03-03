@@ -14,7 +14,9 @@ const bedSchema = new mongoose_1.Schema({
     bounding_box: { type: bbSchema, required: false },
     deleted: { type: Boolean, required: false, default: false },
     room_no: { type: Number, required: true },
-    bed_no: { type: String, required: false }
+    bed_no: { type: String, required: false },
+    locked_by: { type: String, required: false },
+    locked_at: { type: Number, required: false }
 }, {
     timestamps: true,
     toJSON: {

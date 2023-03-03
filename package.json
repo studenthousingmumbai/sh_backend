@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc -p .",
     "dev": "ts-node-dev src/index.ts",
-    "start": "node Build/index.js"
+    "start": "node ./Build/index.js"
   },
   "keywords": [],
   "author": "",

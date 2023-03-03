@@ -14,8 +14,8 @@ phases:
 
   build:
     commands:
-      - rm -rf src
       - echo Build complete!
+      - ls Build
 
 artifacts:
   files:
