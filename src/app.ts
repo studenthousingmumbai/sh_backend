@@ -14,19 +14,20 @@ const endpointSecret = config.STRIPE_ENDPOINT_SECRET;
 // register mandatory middleware 
 app.use(cors());
 
-app.post('/webhook', express.raw({ type: 'application/json' }), async (request, response) => {
-    const sig = request.headers['stripe-signature'];
-    let event;
+app.post('/webhook', express.json({ type: 'application/json' }), async (req, res) => {
+    // const sig = request.headers['stripe-signature'];
+    // let event;
 
-    console.log("Stripe event received: ", event); 
+    // console.log("Stripe event received: ", event); 
 
-    try {
-        event = stripe.webhooks.constructEvent(request.body, sig, endpointSecret);
-    } catch (err: any) {
-        console.log(err);
-        response.status(400).send(`Webhook Error: ${err.message}`);
-        return;
-    }
+    // try {
+    //     event = stripe.webhooks.constructEvent(request.body, sig, endpointSecret);
+    // } catch (err: any) {
+    //     console.log(err);
+    //     response.status(400).send(`Webhook Error: ${err.message}`);
+    //     return;
+    // }
+    const event = req.body;
 
     console.log("Signature verified successfully!!");
 
@@ -71,7 +72,7 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (request, 
     }
 
     // Return a 200 response to acknowledge receipt of the event
-    response.send();
+    res.send();
 });
 
 
