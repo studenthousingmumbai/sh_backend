@@ -11,7 +11,7 @@ export default interface IUser{
     password?: string;
     phone_number?: string;
     dob: Date; 
-    google_signin: boolean;
+    google_signin?: boolean;
     address: {
         line_1: string;
         line_2?: string;
@@ -19,6 +19,9 @@ export default interface IUser{
         state: string; 
         zip: number;
     }; 
+    verified?: boolean;
+    verification_code?: string;
+    reset_code?: string;
     deleted?: boolean;
     created_at?: Date;
     updated_at?: Date;

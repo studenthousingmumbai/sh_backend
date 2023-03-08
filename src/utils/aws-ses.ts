@@ -5,7 +5,7 @@ const REGION = config.AWS_REGION;
 const ACCESS_KEY = config.AWS_ACCESS_KEY;
 const SECRET_ACCESS_KEY = config.AWS_SECRET_KEY;
 
-export async function sendEmail(to: string, subject: string, body: string) {
+export async function sendEmail(to: string, from: string, subject: string, body: string) {
     // Configure AWS SES
     AWS.config.update({
         region: REGION,
@@ -33,7 +33,7 @@ export async function sendEmail(to: string, subject: string, body: string) {
                 Data: subject
             }
         },
-        Source: "sender@example.com"
+        Source: from
     };
 
     // Send the email

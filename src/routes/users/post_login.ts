@@ -35,6 +35,10 @@ export default [
         }
         else { 
             existingUser = await User.findOne({ email, scope: 'USER' });
+
+            if(!existingUser!.verified) { 
+                throw new BadRequestError("Please verify your account before logging in!"); 
+            }
         }
 
         // check if a user with the supplied email exists 
@@ -56,7 +60,9 @@ export default [
             firstname: existingUser.firstname, 
             lastname: existingUser.lastname, 
             role: existingUser.role, 
-            scope: existingUser.scope
+            scope: existingUser.scope,
+            verified: existingUser.verified,
+            verification_code: existingUser.verification_code
         }
 
         // generate access token 

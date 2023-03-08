@@ -22,6 +22,12 @@ export default [
     ...middleware, 
     async (req: Request, res: Response) => { 
         const { appartment_id, bbox, room_no, bed_no } = req.body;
+        const existing_bed = await Bed.findOne({ appartment: appartment_id, bed_no, room_no }); 
+
+        if(existing_bed){ 
+            throw new BadRequestError(`Bed with bed_no: ${bed_no} and room_no: ${room_no}, already exists for this appartment!`); 
+        }
+
         const bed = new Bed({ 
             appartment: appartment_id, 
             bounding_box: bbox, 
@@ -29,8 +35,6 @@ export default [
             bed_no
         }); 
         await bed.save(); 
-
-        console.log("created bed: ", bed);
 
         res.status(201).send(bed);
     }

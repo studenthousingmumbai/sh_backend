@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { body } from 'express-validator';
+import { v4 as uuidv4 } from 'uuid';
 
 import { validateRequest } from '../../middleware';
 import { BadRequestError } from '../../errors';
@@ -7,7 +8,7 @@ import { generateAccessToken } from '../../utils/auth';
 import User from '../../models/users';
 import { RoleTypes, UserPermissionTypes, UserScopes } from '../../constants';
 import config from '../../config';
-
+import { sendEmail } from '../../utils/aws-ses';
 
 const validation_rules = [
     body('firstname').exists().withMessage("firstname must be supplied").notEmpty().withMessage('firstname cannot be blank'),
@@ -79,7 +80,9 @@ export default [
                 password, 
                 role: role || RoleTypes.SUPERVISOR, 
                 permissions: user_permissions, 
-                scope: UserScopes.ADMIN
+                scope: UserScopes.ADMIN, 
+                verified: false, 
+                google_signin: true
             }); 
             await new_user.save();
 
@@ -108,6 +111,27 @@ export default [
             });
         } 
         else { 
+            const account_verification_code = uuidv4();
+
+            // send a email verification link here 
+            await sendEmail(
+                email, 
+                config.SES_FROM_EMAIL, 
+                "Student Housing account verification", 
+                `
+                Hello ${firstname}, 
+                
+                We have received an account creation request from you on Student housing. If you have created the account please click the below link to verify your email.
+                If you haven't created the account you can safely ignore this email. 
+
+                Click the below link to verify your account - 
+                ${config.ACCOUNT_VERIFICATION_LINK}/verification/${account_verification_code}
+
+                Best Regards, 
+                Student Housing 
+                `
+            ); 
+
             // create new user and save 
             const new_user = new User({ 
                 firstname, 
@@ -115,7 +139,10 @@ export default [
                 email, 
                 password, 
                 role: RoleTypes.USER, 
-                scope: UserScopes.USER
+                scope: UserScopes.USER, 
+                verified: false, 
+                google_signin: false,
+                verification_code: account_verification_code 
             }); 
             await new_user.save();
 
@@ -125,7 +152,9 @@ export default [
                 email: new_user.email, 
                 firstname: new_user.firstname, 
                 lastname: new_user.lastname, 
-                scope: new_user.scope
+                scope: new_user.scope,
+                verified: new_user.verified,
+                verification_code: new_user.verification_code
             });
 
             res.status(201).send({ 
@@ -136,7 +165,9 @@ export default [
                     firstname: new_user.firstname, 
                     lastname: new_user.lastname, 
                     role: new_user.role, 
-                    scope: new_user.scope
+                    scope: new_user.scope,
+                    verified: new_user.verified,
+                    verification_code: new_user.verification_code
                 } 
             });
         }

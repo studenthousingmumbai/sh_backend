@@ -28,7 +28,7 @@ export default [
         console.log("Beds: ", beds); 
 
         if(!beds || beds.length === 0) {
-            throw new BadRequestError("No listings found"); 
+            return res.status(200).send([]);
         }
 
         res.status(200).send(beds);

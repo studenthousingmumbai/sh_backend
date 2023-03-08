@@ -10,9 +10,11 @@ import googleSignin from './post-google-signin';
 import currentUser from './current-user'; 
 import searchUsers from './search-users';
 import searchAdmins from './search-admins';
+import verifyAccount from './verify-account';
 
 const router = Router();
 
+router.get('/verify/:verification_code', ...verifyAccount);
 router.get('/current-user', ...currentUser);
 router.patch('/', ...patchUser); 
 router.get('/search-users', ...searchUsers);

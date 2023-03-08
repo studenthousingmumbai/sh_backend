@@ -24,6 +24,9 @@ const userSchema = new Schema<IUser>(
         google_signin: { type: Boolean, required: false }, 
         address: { type: addressSchema, required: false }, 
         deleted: { type: Boolean, required: false }, 
+        verified: { type: Boolean, required: false, default: false }, 
+        verification_code: { type: String, required: false }, 
+        reset_code: { type: String, required: false }
     },
     {
         timestamps: true,

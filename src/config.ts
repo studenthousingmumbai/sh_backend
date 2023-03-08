@@ -24,5 +24,8 @@ export default {
 
     STRIPE_CHECKOUT_SUCCESS_URL: process.env.STRIPE_CHECKOUT_SUCCESS_URL as string, 
     STRIPE_CHECKOUT_CANCEL_URL: process.env.STRIPE_CHECKOUT_CANCEL_URL as string, 
-    STRIPE_ENDPOINT_SECRET: process.env.STRIPE_ENDPOINT_SECRET as string
+    STRIPE_ENDPOINT_SECRET: process.env.STRIPE_ENDPOINT_SECRET as string,
+    SES_FROM_EMAIL: process.env.SES_FROM_EMAIL as string, 
+
+    ACCOUNT_VERIFICATION_LINK: process.env.ACCOUNT_VERIFICATION_LINK as string 
 }; 
