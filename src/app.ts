@@ -38,7 +38,7 @@ app.post('/webhook', express.json({ type: 'application/json' }), async (req, res
             const { payment_status, metadata, status, amount_total } = checkoutComplete; 
 
             if(payment_status === 'paid' && status === 'complete') { 
-                const { user, appartment, bed, floor, course, year, listing } = metadata; 
+                const { user, appartment, bed, floor, course, year, listing, college } = metadata; 
                 // create order in DB here 
                 const selected_bed = await Bed.findById(bed); 
         
@@ -54,7 +54,8 @@ app.post('/webhook', express.json({ type: 'application/json' }), async (req, res
                     appartment, 
                     floor, 
                     course, 
-                    year 
+                    year, 
+                    college
                 }); 
                 await order.save(); 
 

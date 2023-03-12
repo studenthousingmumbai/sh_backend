@@ -1,14 +1,14 @@
 import { Request, Response } from 'express';
 import { body } from 'express-validator';
 import { v4 as uuidv4 } from 'uuid';
+import axios from 'axios';
 
 import { validateRequest } from '../../middleware';
 import { BadRequestError } from '../../errors';
-import { generateAccessToken } from '../../utils/auth';
 import Listing from '../../models/listings';
-import { Password } from '../../utils/password';
 import { uploaded_files } from '../../utils/aws-s3';
 import { s3_upload } from '../../utils/aws-s3';
+import { getCoordinates } from '../../utils/google-maps';
 
 // const validation_rules = [
 //     body('email').exists().withMessage("email must be supplied").notEmpty().withMessage('email cannot be blank').isEmail().withMessage('email must be valid'),
@@ -40,12 +40,9 @@ export default [
             price, 
             gender,
         } = req.body;
+
         const images = [];
-        const amenities_images = []; 
-
         const listing_image_files: any = req.files && "images" in req.files && req.files['images'] || null; 
-
-        // check if another listing with the same name does not exist  
         const existing_listing = await Listing.findOne({ name }); 
         
         if(existing_listing) { 
@@ -54,18 +51,26 @@ export default [
 
         if (amenities && typeof amenities === "string") {
             amenities = JSON.parse(amenities); 
-            console.log("amenities: ", amenities); 
         }
-        // TODOD - use address to find lat long 
+
+        // Use address to find lat long 
+        const address_obj = JSON.parse(address)
+        const full_address = address_obj.line_1 + ", " + address_obj.line_2 + ", " + address_obj.city + ", "  +  address_obj.state + ", " + address_obj.zip;
+        const location = await getCoordinates(full_address); 
+
+        if(Object.keys(location).length === 0) {
+            throw new BadRequestError("Geocoding failed! Please enter a valid address.");
+        }
 
         // construct listing object and save to db 
         const new_listing = new Listing({
             name, 
             description, 
-            address: JSON.parse(address), 
+            address: address_obj, 
             price, 
             gender, 
-            amenities
+            amenities, 
+            location
         });
         await new_listing.save(); 
 
@@ -73,14 +78,9 @@ export default [
             // upload listing images to s3 & get s3 urls 
             // @ts-ignore
             for(let i=0; i < listing_image_files.length; i++) {
-                console.log(i); 
-
                 const image_file = listing_image_files[i]; 
                 const original_name = image_file.originalname; 
                 const file_extension = original_name.split('.')[1]; 
-
-                console.log("Original file name: ", original_name); 
-                console.log("File extension: ", file_extension); 
 
                 // upload image to s3 
                 try{ 

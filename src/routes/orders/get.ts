@@ -51,6 +51,7 @@ export default [
                 floor: Order.floor, 
                 course: Order.course || "",
                 year: Order.year || "", 
+                college: Order.college || "",
                 bed_no: Order.bed && Order.bed.bed_no || "", 
                 appartment: Order.appartment && Order.appartment.appartment_number || "", 
                 days_remaining: getDaysLeftUntilOneYearFromMongoDBTimestamp(Order.createdAt), 

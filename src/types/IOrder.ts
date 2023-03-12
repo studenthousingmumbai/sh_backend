@@ -9,8 +9,9 @@ export default interface IOrder {
     status: String, 
     amount: String, 
     appartment: String, 
-    course: String, 
-    year: String,
+    college?: String,
+    course?: String, 
+    year?: String,
     floor: String, 
     deleted?: Boolean;
     createdAt?: Date;

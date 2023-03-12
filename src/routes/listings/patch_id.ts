@@ -7,6 +7,7 @@ import { BadRequestError } from '../../errors';
 import Listing from '../../models/listings';
 import { uploaded_files } from '../../utils/aws-s3';
 import { s3_upload } from '../../utils/aws-s3';
+import { getCoordinates } from '../../utils/google-maps';
 
 const validation_rules = [
     body('id').exists().withMessage("id must be supplied").notEmpty().withMessage('id cannot be blank'),
@@ -29,9 +30,6 @@ export default [
         let { id, amenities, existing_images, address } = req.body;
         const listing_image_files: any = req.files && "images" in req.files && req.files['images'] || null; 
         const new_images = []; 
-
-        console.log("Req body: ", req.body); 
-
         const listing: any = await Listing.findById(id);
 
         // check if a user with the supplied email exists 
@@ -50,14 +48,9 @@ export default [
             // upload listing images to s3 & get s3 urls 
             // @ts-ignore
             for(let i=0; i < listing_image_files.length; i++) {
-                console.log(i); 
-
                 const image_file = listing_image_files[i]; 
                 const original_name = image_file.originalname; 
                 const file_extension = original_name.split('.')[1]; 
-
-                console.log("Original file name: ", original_name); 
-                console.log("File extension: ", file_extension); 
 
                 // upload image to s3 
                 try{ 
@@ -82,12 +75,23 @@ export default [
         delete req.body.id; 
 
         if(req.body.address){ 
+            // Use address to find lat long 
+            const address_obj = JSON.parse(address)
+            const full_address = address_obj.line_1 + ", " + address_obj.line_2 + ", " + address_obj.city + ", "  +  address_obj.state + ", " + address_obj.zip;
+            const location = await getCoordinates(full_address); 
+
+            if(Object.keys(location).length === 0) {
+                throw new BadRequestError("Geocoding failed! Please enter a valid address.");
+            }
+
             listing.set({ 
-                address: JSON.parse(address)
+                address: address_obj,
+                location 
             }); 
 
             delete req.body.address; 
         }
+
         if(req.body.amenities) { 
             listing.set({  
                 amenities: JSON.parse(amenities) 
@@ -95,6 +99,7 @@ export default [
 
             delete req.body.amenities
         }
+
         listing.set({  
             ...req.body, 
         });
@@ -103,4 +108,4 @@ export default [
 
         res.status(201).send(listing);
     }
-]
+];

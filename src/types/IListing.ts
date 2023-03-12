@@ -6,7 +6,7 @@ export default interface IListing {
     gender: string, 
     location?: { 
         lat: string, 
-        long: string 
+        lng: string 
     }, 
     floors?: [
         {

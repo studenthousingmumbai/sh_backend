@@ -10,6 +10,7 @@ const orderSchema = new Schema<IOrder>(
         appartment: { type: Types.ObjectId, ref: "Appartment", required: true }, 
         course: { type: String,  required: false }, 
         year: { type: String, required: false }, 
+        college: { type: String, required: false },
         floor: { type: String, required: true }, 
         status: { type: String, required: false }, 
         deleted: { type: Boolean, required: false, default: false }

@@ -3,7 +3,7 @@ import mongoose, { model, Schema } from 'mongoose';
 
 const locationSchema = new Schema({ 
     lat: { type: String }, 
-    long: { type: String }
+    lng: { type: String }
 });
 
 const floorSchema = new Schema({ 

@@ -16,6 +16,7 @@ export default {
 
     GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID as string, 
     GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET as string,
+    GOOGLE_MAPS_API_KEY: process.env.GOOGLE_MAPS_API_KEY as string, 
 
     ADMIN_API_KEY: process.env.ADMIN_API_KEY as string,
 
@@ -28,4 +29,4 @@ export default {
     SES_FROM_EMAIL: process.env.SES_FROM_EMAIL as string, 
 
     ACCOUNT_VERIFICATION_LINK: process.env.ACCOUNT_VERIFICATION_LINK as string 
-}; 
+};

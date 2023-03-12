@@ -7,7 +7,6 @@ import { generateAccessToken } from '../../utils/auth';
 import Order from '../../models/orders';
 import { getDaysLeftUntilOneYearFromMongoDBTimestamp } from '../../utils/datetime';
 
-
 const validation_rules = [
     // body('firstname').exists().withMessage("firstname must be supplied").notEmpty().withMessage('firstname cannot be blank'),
     // body('email').exists().withMessage("email must be supplied").notEmpty().withMessage('email cannot be blank').isEmail().withMessage('email must be valid'),
@@ -50,6 +49,7 @@ export default [
                         { 'user.lastname': { $regex: '.*' + query + '.*', $options: 'i' } },
                         { 'listing.name': { $regex: '.*' + query + '.*', $options: 'i' } },
                         { course: { $regex: '.*' + query + '.*', $options: 'i' } },
+                        { college: { $regex: '.*' + query + '.*', $options: 'i' } },
                         { year: { $regex: '.*' + query + '.*', $options: 'i' } },
                         { floor: { $regex: '.*' + query + '.*', $options: 'i' } },
                         { amount: { $regex: '.*' + query + '.*', $options: 'i' } }

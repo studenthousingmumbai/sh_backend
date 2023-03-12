@@ -29,8 +29,6 @@ export default [
     async (req: Request, res: Response) => { 
         const { token } = req.body;
 
-        console.log(req.body);
-
         try { 
             const ticket = await client.verifyIdToken({
                 idToken: token,

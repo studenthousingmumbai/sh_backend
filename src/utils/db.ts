@@ -19,7 +19,7 @@ async function cleanDB(){
 
 (async () => { 
     try{    
-        await mongoose.connect(local_db);
+        await mongoose.connect(sh_dev_db);
         console.log('Connected to database successfully!');
 
         await cleanDB();

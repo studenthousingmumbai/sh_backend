@@ -23,7 +23,7 @@ const middleware: any = [
 export default [ 
     ...middleware, 
     async (req: Request, res: Response) => {
-        const { user, appartment, bed, floor, course, year, listing, amount } = req.body; 
+        const { user, appartment, bed, floor, course, year, listing, amount, college } = req.body; 
 
         const existing_user = await User.findById(user); 
         const existing_listing = await Listing.findById(listing); 
@@ -63,6 +63,7 @@ export default [
                 listing,
                 course: course || "", 
                 year: year || "", 
+                college: college || ""
             },
         });
       
