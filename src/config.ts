@@ -5,11 +5,14 @@ dotenv.config();
 export default {
     PORT: parseInt(process.env.PORT as string) || 8000,
     HOST: process.env.HOST as string,
-    JWT_KEY: process.env.JWT_KEY as string,
     DB_URI: process.env.DB_URI as string,
+
+    JWT_KEY: process.env.JWT_KEY as string,
+    ADMIN_API_KEY: process.env.ADMIN_API_KEY as string,
+
     BOOKING_TIMEOUT: parseInt(process.env.BOOKING_TIMEOUT as string) || 10, 
     PASSWORD_RESET_TIMEOUT: parseInt(process.env.PASSWORD_RESET_TIMEOUT as string) || 5, 
-    ADMIN_API_KEY: process.env.ADMIN_API_KEY as string,
+    
     ACCOUNT_VERIFICATION_LINK: process.env.ACCOUNT_VERIFICATION_LINK as string,
 
     AWS_REGION: process.env.AWS_REGION as string,

@@ -39,7 +39,7 @@ export default [
         await sendEmail(
             email, 
             config.SES_FROM_EMAIL, 
-            "Student Housing account verification", 
+            "Student Housing account password reset", 
             `
             Hello ${user.firstname}, 
             
