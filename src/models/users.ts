@@ -26,7 +26,8 @@ const userSchema = new Schema<IUser>(
         deleted: { type: Boolean, required: false }, 
         verified: { type: Boolean, required: false, default: false }, 
         verification_code: { type: String, required: false }, 
-        reset_code: { type: String, required: false }
+        reset_code: { type: String, required: false },
+        reset_at: { type: Number, required: false }
     },
     {
         timestamps: true,

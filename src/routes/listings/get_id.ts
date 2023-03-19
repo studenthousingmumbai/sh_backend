@@ -5,7 +5,8 @@ import { validateRequest } from '../../middleware';
 import { BadRequestError } from '../../errors';
 import Listing from '../../models/listings';
 import Bed from '../../models/beds'; 
-import { getMinutesDiff } from '../../utils/datetime';
+import { getDaysLeftUntilOneYearFromMongoDBTimestamp, getMinutesDiff } from '../../utils/datetime';
+import config from '../../config';
 
 // const validation_rules = [
 //     body('email').exists().withMessage("email must be supplied").notEmpty().withMessage('email cannot be blank').isEmail().withMessage('email must be valid'),
@@ -40,20 +41,23 @@ export default [
         // @ts-ignore
         all_appartments = all_appartments.map((appartment) => appartment.id); 
 
-        console.log("All appartments: ", all_appartments);
-
         // get all beds for this listing that are in locked state and check if 2 mins have passed since they were locked 
         const beds = await Bed.find({ locked: true, appartment: { $in: all_appartments } }); 
 
         for(let bed of beds) { 
-            // check 
             const minute_diff = getMinutesDiff(Date.now(), bed.locked_at!); 
-
             // unlock the bed if 2 or more minutes have passed since it was locked
-            if(minute_diff >= 2) { 
+            if(minute_diff >= config.BOOKING_TIMEOUT) { 
                 bed.set({ locked_at: 0, locked: false, locked_by: "" });
-                await bed.save(); 
             }
+
+            // unlock the bed if one year has passed since booking 
+            // @ts-ignore
+            if(!bed.available && getDaysLeftUntilOneYearFromMongoDBTimestamp(bed.createdAt as string) <= 0){ 
+                bed.set({ available: true, locked: false });
+            }
+
+            await bed.save(); 
         }
 
         res.status(201).send(listing);

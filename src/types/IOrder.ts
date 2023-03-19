@@ -13,7 +13,8 @@ export default interface IOrder {
     course?: String, 
     year?: String,
     floor: String, 
+    payment_details?: any;
     deleted?: Boolean;
     createdAt?: Date;
-    updatedAT?: Date;
+    updatedAt?: Date;
 };

@@ -11,6 +11,9 @@ import currentUser from './current-user';
 import searchUsers from './search-users';
 import searchAdmins from './search-admins';
 import verifyAccount from './verify-account';
+import forgotPassword from './forgot-password';
+import verifyResetCode from './verify-reset-code';
+import resetPassword from './reset-password';
 
 const router = Router();
 
@@ -24,6 +27,9 @@ router.post('/signup', ...postUser);
 router.post('/login', loginRouter); 
 router.post("/all", ...getUsers); 
 router.delete('/:id', ...deleteUser);
-router.post('/google-signin', ...googleSignin)
+router.post('/google-signin', ...googleSignin);
+router.post('/forgot-password', ...forgotPassword);
+router.post('/verify-reset-code', ...verifyResetCode);
+router.post('/reset-password', ...resetPassword);
 
 export default router;

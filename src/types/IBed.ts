@@ -16,6 +16,6 @@ export default interface IBed {
     room_no: number, 
     bed_no?: string, 
     deleted?: boolean;
-    created_at?: Date;
-    updated_at?: Date;
+    createdAt?: Date;
+    updatedAt?: Date;
 };

@@ -10,6 +10,6 @@ export default interface Appartment {
     beds?: Array<string>,                                   // will store an array of references to a bed object 
     deleted?: boolean;
     published?: boolean;                                    // whether this appartment should be shown on the user facing frontend 
-    created_at?: Date;
-    updated_at?: Date;
+    createdAt?: Date;
+    updatedAt?: Date;
 }; 

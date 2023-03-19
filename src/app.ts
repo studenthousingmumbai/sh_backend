@@ -28,14 +28,15 @@ app.post('/webhook', express.json({ type: 'application/json' }), async (req, res
     //     return;
     // }
     const event = req.body;
-
     console.log("Signature verified successfully!!");
 
     // Handle the event
     switch (event.type) {
         case 'checkout.session.completed': 
             const checkoutComplete = event.data.object;
-            const { payment_status, metadata, status, amount_total } = checkoutComplete; 
+            const { payment_status, metadata, status, amount_total, phone_number_collection, customer_details, shipping_details, total_details } = checkoutComplete; 
+
+            console.log("customer_details: ", customer_details); 
 
             if(payment_status === 'paid' && status === 'complete') { 
                 const { user, appartment, bed, floor, course, year, listing, college } = metadata; 
@@ -55,7 +56,8 @@ app.post('/webhook', express.json({ type: 'application/json' }), async (req, res
                     floor, 
                     course, 
                     year, 
-                    college
+                    college, 
+                    payment_details: customer_details
                 }); 
                 await order.save(); 
 
@@ -75,7 +77,6 @@ app.post('/webhook', express.json({ type: 'application/json' }), async (req, res
     // Return a 200 response to acknowledge receipt of the event
     res.send();
 });
-
 
 app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));

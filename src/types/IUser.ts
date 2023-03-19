@@ -22,7 +22,8 @@ export default interface IUser{
     verified?: boolean;
     verification_code?: string;
     reset_code?: string;
+    reset_at?: number; 
     deleted?: boolean;
-    created_at?: Date;
-    updated_at?: Date;
+    createdAt?: Date;
+    updatedAt?: Date;
 };

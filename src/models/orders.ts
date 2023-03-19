@@ -13,7 +13,8 @@ const orderSchema = new Schema<IOrder>(
         college: { type: String, required: false },
         floor: { type: String, required: true }, 
         status: { type: String, required: false }, 
-        deleted: { type: Boolean, required: false, default: false }
+        deleted: { type: Boolean, required: false, default: false },
+        payment_details: { type: Schema.Types.Mixed, required: false },
     },
     {
         timestamps: true,
