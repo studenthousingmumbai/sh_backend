@@ -29,6 +29,13 @@ export default [
             throw new BadRequestError("Bed not found!"); 
         }
 
+        // check if this bed has mot been locked by someone else 
+        if(req.body.locked && req.body.locked_by) { 
+            if(bed.locked && bed.locked_by !== req.body.locked_by) { 
+                throw new BadRequestError("The bed you are trying to book has been reserverd by another user!"); 
+            }
+        }   
+
         bed.set({ 
             available: available ? available : bed.available, 
             locked: locked ? locked : bed.locked, 
