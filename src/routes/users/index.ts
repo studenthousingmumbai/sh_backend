@@ -14,6 +14,7 @@ import verifyAccount from './verify-account';
 import forgotPassword from './forgot-password';
 import verifyResetCode from './verify-reset-code';
 import resetPassword from './reset-password';
+import contactUs from './contact-us';
 
 const router = Router();
 
@@ -31,5 +32,6 @@ router.post('/google-signin', ...googleSignin);
 router.post('/forgot-password', ...forgotPassword);
 router.post('/verify-reset-code', ...verifyResetCode);
 router.post('/reset-password', ...resetPassword);
+router.post('/contact-us', contactUs);
 
 export default router;

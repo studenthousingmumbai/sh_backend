@@ -27,7 +27,16 @@ const userSchema = new Schema<IUser>(
         verified: { type: Boolean, required: false, default: false }, 
         verification_code: { type: String, required: false }, 
         reset_code: { type: String, required: false },
-        reset_at: { type: Number, required: false }
+        reset_at: { type: Number, required: false },
+        father_name: { type: String, required: false },
+        mother_name: { type: String, required: false },
+        mother_phone: { type: String, required: false },
+        father_phone: { type: String, required: false }, 
+        pan_no: { type: String, required: false }, 
+        father_pan_no: { type: String, required: false }, 
+        college: { type: String, required: false }, 
+        course: { type: String, required: false }, 
+        year: { type: String, required: false },
     },
     {
         timestamps: true,

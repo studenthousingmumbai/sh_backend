@@ -19,6 +19,15 @@ export default interface IUser{
         state: string; 
         zip: number;
     }; 
+    father_name: string, 
+    mother_name: string, 
+    mother_phone: string, 
+    father_phone: string, 
+    pan_no: string, 
+    father_pan_no: string, 
+    college: string, 
+    course: string, 
+    year: string, 
     verified?: boolean;
     verification_code?: string;
     reset_code?: string;

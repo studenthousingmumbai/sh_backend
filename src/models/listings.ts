@@ -32,7 +32,8 @@ const listingSchema = new Schema<IListing>(
         deleted: { type: Boolean, required: false, default: false },
         available: { type: Boolean, required: false, default: true }, 
         images: { type: [String], required: false }, 
-        publish: { type: Boolean, default: false, required: false }
+        publish: { type: Boolean, default: false, required: false }, 
+        video_link: { type: String, required: false }
     },
     {
         timestamps: true,

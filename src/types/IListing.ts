@@ -20,6 +20,7 @@ export default interface IListing {
     amenities: Array<{
         name: string, 
     }>, 
+    video_link?: string,
     publish?: boolean, 
     address: {
         line_1: string, 

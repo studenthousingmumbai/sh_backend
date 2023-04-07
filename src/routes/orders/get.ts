@@ -38,6 +38,8 @@ export default [
         for(let order of orders){ 
             const Order = order as any; 
 
+            console.log("ORder: ", Order);
+
             orders_transformed.push({ 
                 id: Order.id, 
                 listing: Order.listing && Order.listing.name || "",  
@@ -45,7 +47,7 @@ export default [
                 images: Order.listing && Order.listing.images || [], 
                 address: Order.listing && Order.listing.address || "",
                 user: Order.user && Order.user.firstname + " " + Order.user.lastname || "", 
-                bed: Order.bed && Order.bed._id || "", 
+                bed: Order.bed && Order.bed || "", 
                 room_no: Order.bed && Order.bed.room_no || "",
                 amount: Order.amount,
                 floor: Order.floor, 
@@ -55,6 +57,7 @@ export default [
                 bed_no: Order.bed && Order.bed.bed_no || "", 
                 appartment: Order.appartment && Order.appartment.appartment_number || "", 
                 days_remaining: getDaysLeftUntilOneYearFromMongoDBTimestamp(Order.createdAt), 
+                payment_details: Order.payment_details,
                 createdAt: Order.createdAt, 
                 updatedAt: Order.updatedAt
             }); 
