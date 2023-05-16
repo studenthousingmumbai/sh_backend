@@ -26,7 +26,7 @@ export default [
     ...middleware, 
     async (req: Request, res: Response) => { 
         const admin_key = req.headers['admin-api-key']; 
-        const { firstname, lastname, email, password, role } = req.body;
+        const { firstname, lastname, email, password, role, phoneNumber } = req.body;
         const user_exists = await User.findOne({ email });
 
         // check if a user with the supplied email exists 
@@ -138,6 +138,7 @@ export default [
                 lastname, 
                 email, 
                 password, 
+                phone_number: phoneNumber ? phoneNumber: "",
                 role: RoleTypes.USER, 
                 scope: UserScopes.USER, 
                 verified: false, 

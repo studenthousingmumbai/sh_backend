@@ -100,11 +100,11 @@ const whitelist = [
 export const uploaded_files = multer({ 
     storage: storage, 
     fileFilter: (req, file, cb) => {
-        if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg" || file.mimetype === 'image/webp') {
+        if (whitelist.includes(file.mimetype)) {
             cb(null, true);
         } else {
             cb(null, false);
-            return cb(new BadRequestError('Only .png, .jpg and .jpeg format allowed!'));
+            return cb(new BadRequestError('Only .png, .jpg/.jpeg and .webp format allowed!'));
         }
     }
 });
