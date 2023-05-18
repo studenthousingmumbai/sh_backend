@@ -16,9 +16,9 @@ import { getCoordinates } from '../../utils/google-maps';
 // ];
 
 const cpUpload = uploaded_files.fields([
-    { name: 'floor_plan', maxCount: 1 }, 
-    { name: 'images', maxCount: 8 },
-    { name: 'amenities_images', maxCount: 100 } 
+    // { name: 'floor_plan', maxCount: 1 }, 
+    { name: 'images', maxCount: 10 },
+    // { name: 'amenities_images', maxCount: 100 } 
 ]); 
 
 const middleware: any = [
