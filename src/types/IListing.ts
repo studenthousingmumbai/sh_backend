@@ -14,6 +14,12 @@ export default interface IListing {
             appartments: Array<string>       // will store an array of references to an appartment object     
         }
     ], 
+    metatags?: [ 
+        { 
+            title: string, 
+            description: string 
+        }
+    ], 
     images?: Array<string>,
     description: string, 
     rules?: Array<string>, 
@@ -29,7 +35,8 @@ export default interface IListing {
         state: string, 
         zip: string
     }, 
-    price: string, 
+    price: string,
+    total_price: string, 
     deleted: boolean, 
     available: boolean,
     createdAt?: Date;

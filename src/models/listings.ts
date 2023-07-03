@@ -11,6 +11,11 @@ const floorSchema = new Schema({
     appartments: { type: [{ type: mongoose.Types.ObjectId, ref: "Appartment" }] }
 }); 
 
+const metatagsSchema = new Schema({ 
+    title: { type: String }, 
+    description: { type: String }
+}); 
+
 const addressSchema = new Schema({ 
     line_1: { type: String }, 
     line_2: { type: String }, 
@@ -33,7 +38,9 @@ const listingSchema = new Schema<IListing>(
         available: { type: Boolean, required: false, default: true }, 
         images: { type: [String], required: false }, 
         publish: { type: Boolean, default: false, required: false }, 
-        video_link: { type: String, required: false }
+        video_link: { type: String, required: false }, 
+        total_price: { type: String, required: false }, 
+        metatags: { type: [metatagsSchema], required: false }
     },
     {
         timestamps: true,

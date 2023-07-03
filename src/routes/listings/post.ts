@@ -39,6 +39,7 @@ export default [
             address, 
             price, 
             gender,
+            metatags
         } = req.body;
 
         const images = [];
@@ -51,6 +52,10 @@ export default [
 
         if (amenities && typeof amenities === "string") {
             amenities = JSON.parse(amenities); 
+        }
+
+        if (metatags && typeof metatags === "string") {
+            metatags = JSON.parse(metatags); 
         }
 
         // Use address to find lat long 
@@ -70,7 +75,8 @@ export default [
             price, 
             gender, 
             amenities, 
-            location
+            location, 
+            metatags
         });
         await new_listing.save(); 
 

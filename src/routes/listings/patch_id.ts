@@ -27,7 +27,7 @@ const middleware: any = [
 export default [
     ...middleware, 
     async (req: Request, res: Response) => { 
-        let { id, amenities, existing_images, address } = req.body;
+        let { id, amenities, existing_images, address, metatags } = req.body;
         const listing_image_files: any = req.files && "images" in req.files && req.files['images'] || null; 
         const new_images = []; 
         const listing: any = await Listing.findById(id);
@@ -92,6 +92,7 @@ export default [
             delete req.body.address; 
         }
 
+        // set the amenities 
         if(req.body.amenities) { 
             listing.set({  
                 amenities: JSON.parse(amenities) 
@@ -100,6 +101,16 @@ export default [
             delete req.body.amenities
         }
 
+        // set the metatags 
+        if(req.body.metatags) { 
+            listing.set({  
+                metatags: JSON.parse(metatags) 
+            }); 
+
+            delete req.body.metatags
+        }
+
+        // update the listing object 
         listing.set({  
             ...req.body, 
         });
