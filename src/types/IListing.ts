@@ -20,6 +20,20 @@ export default interface IListing {
             description: string 
         }
     ], 
+    faqs?: [ 
+        { 
+            question: string, 
+            answer: string 
+        }
+    ],
+    occupancies?: [ 
+        { 
+            description: string, 
+            price: string, 
+            total_beds: number, 
+            period: string
+        }
+    ]
     images?: Array<string>,
     description: string, 
     rules?: Array<string>, 

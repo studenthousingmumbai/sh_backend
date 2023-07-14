@@ -24,6 +24,18 @@ const addressSchema = new Schema({
     zip: { type: String }
 }); 
 
+const faqSchema = new Schema({
+    question: { type: String }, 
+    answer: { type: String }
+})
+
+const occupancySchema = new Schema({ 
+    price: { type: String }, 
+    description: { type: String }, 
+    total_beds: { type: String }, 
+    period: { type: String } 
+}); 
+
 const listingSchema = new Schema<IListing>(
     {
         name: { type: String, required: true },
@@ -40,7 +52,9 @@ const listingSchema = new Schema<IListing>(
         publish: { type: Boolean, default: false, required: false }, 
         video_link: { type: String, required: false }, 
         total_price: { type: String, required: false }, 
-        metatags: { type: [metatagsSchema], required: false }
+        metatags: { type: [metatagsSchema], required: false },
+        faqs: { type: [faqSchema], required: false },
+        occupancies: { type: [occupancySchema], required: false }
     },
     {
         timestamps: true,
