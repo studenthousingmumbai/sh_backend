@@ -15,6 +15,7 @@ import forgotPassword from './forgot-password';
 import verifyResetCode from './verify-reset-code';
 import resetPassword from './reset-password';
 import contactUs from './contact-us';
+import referAndEarn from './refer-and-earn';
 
 const router = Router();
 
@@ -33,5 +34,6 @@ router.post('/forgot-password', ...forgotPassword);
 router.post('/verify-reset-code', ...verifyResetCode);
 router.post('/reset-password', ...resetPassword);
 router.post('/contact-us', contactUs);
+router.post('/refer-and-earn', referAndEarn); 
 
 export default router;
